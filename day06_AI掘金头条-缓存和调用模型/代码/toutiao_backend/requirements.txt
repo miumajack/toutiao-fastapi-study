@@ -1,0 +1,43 @@
+aiomysql==0.3.2
+aioredis==2.0.1
+annotated-doc==0.0.4
+annotated-types==0.7.0
+anyio==4.12.0
+async-timeout==5.0.1
+bcrypt==3.2.2
+cffi==2.0.0
+click==8.3.1
+cryptography==46.0.3
+fastapi==0.125.0
+greenlet==3.3.0
+h11==0.16.0
+# httpx is used by utils/ai_client.py to call the model API asynchronously.
+# The original course list did not include it, because in the original design
+# the browser called the model API directly and the backend never made any
+# outbound request of its own.
+httpx==0.28.1
+httptools==0.7.1
+idna==3.11
+passlib==1.7.4
+pycparser==2.23
+pydantic==2.12.5
+pydantic_core==2.41.5
+PyMySQL==1.1.2
+python-dotenv==1.2.1
+PyYAML==6.0.3
+redis==7.1.0
+SQLAlchemy==2.0.45
+starlette==0.50.0
+typing-inspection==0.4.2
+typing_extensions==4.15.0
+uvicorn==0.38.0
+# NOTE: keep this file ASCII-only.
+# On Chinese Windows, pip reads requirements.txt using GBK and crashes with
+# UnicodeDecodeError if the file contains UTF-8 Chinese comments.
+#
+# uvloop is a Linux-only event loop and refuses to install on Windows
+# ("uvloop does not support Windows at the moment"). Nothing in this project
+# imports it, so it has been moved out of the list.
+# uvloop==0.22.1
+watchfiles==1.1.1
+websockets==15.0.1

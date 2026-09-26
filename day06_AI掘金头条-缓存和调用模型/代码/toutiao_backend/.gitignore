@@ -1,0 +1,8 @@
+# 密钥绝不能进 Git。这是本文件存在的全部理由。
+.env
+
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/

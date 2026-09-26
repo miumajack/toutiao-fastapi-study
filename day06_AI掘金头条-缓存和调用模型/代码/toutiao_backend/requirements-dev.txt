@@ -1,0 +1,10 @@
+# Development-only dependencies. Not needed to run the server.
+#
+# Install (activate the venv first, or use the full path):
+#   .venv\Scripts\python.exe -m pip install -r requirements-dev.txt
+#
+# Keep this file ASCII-only, for the same reason as requirements.txt.
+
+-r requirements.txt
+
+pytest==9.0.3

@@ -1,0 +1,62 @@
+# ============================================================
+# 学习仓库专用 .gitignore
+# 原则:能被重新生成的东西(虚拟环境、依赖包、编译缓存)都不进 Git,
+#       只有"亲手写的东西"和"课程原始资料"才提交。
+# ============================================================
+
+# ---------- Python 虚拟环境 ----------
+# 体积上万文件,而且里面写死了你本机/讲师电脑的绝对路径,
+# 换台电脑完全不能用,必须自己重新创建。
+venv/
+.venv/
+env/
+ENV/
+virtualenv/
+
+# ---------- Python 编译缓存 ----------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*$py.class
+*.so
+
+# ---------- Python 打包/测试/检查工具的产物 ----------
+.eggs/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# ---------- Node / 前端依赖与构建产物 ----------
+node_modules/
+dist/
+dist-ssr/
+.vite/
+*.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ---------- 密钥与环境变量(绝不能进 Git) ----------
+# 注意:只排除 .env,不排除 .env.example。
+# .env.example 是给人看的模板,里面都是占位符,应该提交。
+.env
+.env.local
+.env.*.local
+
+# ---------- 编辑器 / 操作系统垃圾文件 ----------
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---------- 运行时日志 ----------
+*.log
