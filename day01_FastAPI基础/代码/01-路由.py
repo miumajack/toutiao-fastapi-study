@@ -12,4 +12,4 @@ async def root():
 # 访问 /hello  响应结果 msg: 你好 FastAPI
 @app.get("/hello")
 async def get_hello():
-    return {"msg": "你好 FastAPI"}
+    return {"msg": "你好   FastAPI"}
