@@ -1,4 +1,6 @@
 
+
+
 from sqlalchemy.ext.asyncio import create_async_engine,async_sessionmaker,AsyncSession
 from sqlalchemy.orm import DeclarativeBase,Mapped,mapped_column
 from datetime import datetime
@@ -87,10 +89,12 @@ async def get_db():  #创建会话依赖函数用于后续注入fastapi
 
 
 @app.get("/book/view_book")
-async def get_book(db:AsyncSession = Depends(get_db)):
-    book=await db.execute(select(Book))
-    # res = book.scalars().all()
-    # res = book.scalars().first()
-    res = await db.get(Book,6)   #异步函数中要加入await，不然返回的是一个协程对象，FastAPI 在准备把返回值序列化成 JSON 的时候，
-                                #发现你返回的东西不是它认识的数据类型，而是一个 coroutine（协程对象）。
+async def get_book_author(db:AsyncSession = Depends(get_db)):
+    book_id_list = [1,2,4,9,12]
+    # book = await db.execute(select(Book).where(Book.author.like('余%')))
+    # book = await db.execute(select(Book).where((Book.author.like('余%'))|(Book.price<100)))
+    book = await db.execute(select(Book).where(Book.id.in_(book_id_list)))
+    res = book.scalars().all()
     return res
+
+
