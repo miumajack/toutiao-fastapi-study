@@ -10,23 +10,29 @@ router = APIRouter(prefix='/api/user',tags=['user'])
 
 @router.post('/register')
 async def user_register(userdata:UserRegister,db:AsyncSession=Depends(get_db)):
-    user = check_by_username(userdata.username,db)
+    user = await check_by_username(userdata.username,db)
     if user:
+        print('user_None测试============')
+        print(user)
+        print('user_None测试============')
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail='用户已注册'
+            
         )
+        
     #创建用户
-    new_user=create_user(user_pydantic=userdata,db=db)
-    user_token = create_token(user_id=.,db=db)  
+    new_user = await create_user(user_pydantic=userdata,db=db)
+    print(f'================{type(new_user)}================')
+    user_token = await create_token(user_id=new_user.id,db=db)  
         
     return{
     "code": 200,
     "message": "注册成功",
     "data": {
-        "token": "用户访问令牌",
+        "token": user_token.token,
         "userInfo": {
-        "id": 1,
+        "id": new_user.id,
         "username": userdata.username,
         "bio": "这个人很懒，什么都没留下",
         "avatar": "https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"
