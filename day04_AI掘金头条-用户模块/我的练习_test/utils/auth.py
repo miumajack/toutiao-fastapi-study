@@ -7,15 +7,11 @@ from crud import users
 
 
 # 整合 根据 Token 查询用户，返回用户
-async def get_current_user(
-        authorization: str = Header(..., alias="Authorization"),
-        db: AsyncSession = Depends(get_db)
-):
-    # Bearer xxxxx
-    # token = authorization.split(" ")[1]
-    token = authorization.replace("Bearer ", "")
-    user = await users.get_user_by_token(db, token)
-    if not user:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="无效的令牌或已经过期的令牌")
-
-    return user
+async def token_user(db:AsyncSession=Depends(get_db),
+                     authorization:str=Header(alias='Authorization')
+                     ):
+    token=authorization.split(' ')[1]
+    res =await users.check_user_by_token(db=db,token=token)
+    
+    return res
+    
